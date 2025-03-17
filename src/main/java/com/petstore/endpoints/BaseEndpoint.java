@@ -1,5 +1,6 @@
 package com.petstore.endpoints;
 
+import com.petstore.ConfigurationLoader;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
@@ -12,11 +13,9 @@ import static org.apache.http.HttpHeaders.ACCEPT;
 
 public class BaseEndpoint {
 
-    public static final String BASE_URL = "https://petstore3.swagger.io/api/v3";
-
     public RequestSpecBuilder defaultRequestSpecification()  {
         return new RequestSpecBuilder()
-                .setBaseUri(BASE_URL)
+                .setBaseUri(resolvedBaseUrl())
                 .setContentType(JSON)
                 .addHeader(ACCEPT, JSON.getAcceptHeader())
                 .log(ALL)
@@ -29,4 +28,12 @@ public class BaseEndpoint {
                 .log(ALL)
                 .build();
     }
+
+    private String resolvedBaseUrl() {
+        ConfigurationLoader config = new ConfigurationLoader();
+        String hostUrl = config.getProperty("petstore.base.url");
+        String apiVersion = config.getProperty("api.version");
+        return String.format("%s/api/%s", hostUrl, apiVersion);
+    }
+
 }
