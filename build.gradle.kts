@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "org.moneyapp"
+group = "com.petstore"
 version = "1.0-SNAPSHOT"
 
 repositories {
