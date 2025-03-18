@@ -82,7 +82,6 @@ Run Tests
 
 
 ## Tech Stack 💻
-A tech stack of modern libraries and tools was selected to ensure automated tests can easily be extended to include addtional android and iOS tests.
 
 **API Automation:** RESTAssured
 
